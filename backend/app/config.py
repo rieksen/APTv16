@@ -5,9 +5,22 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    # App
     app_name: str = "APT API"
     app_env: str = "development"
-    database_url: str | None = None
+    
+    # Database
+    database_url: str = "postgresql+asyncpg://user:password@localhost/apt_db"
+    
+    # JWT
+    jwt_secret_key: str = "your-secret-key-change-in-production"
+    jwt_algorithm: str = "HS256"
+    jwt_expiration_hours: int = 24
+    
+    # Security
+    password_hash_algorithm: str = "bcrypt"
+    
+    # CORS
     backend_cors_origins: list[str] = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
